@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   atoi.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lrusinou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nnasyrla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/14 15:25:56 by lrusinou          #+#    #+#             */
-/*   Updated: 2019/11/14 15:43:19 by lrusinou         ###   ########.fr       */
+/*   Created: 2019/10/29 20:36:18 by nnasyrla          #+#    #+#             */
+/*   Updated: 2019/10/29 22:41:57 by nnasyrla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h> 
-#include <stdio.h>
-
-int	ft_atoi(const char *str)
+int	ft_atoi(char *str)
 {
-	int i = 0;
-	int sign = 1;
-	int result = 0;
+	int	result;
+	int	sign;
 
-	while(str[i] == ' ' || str[i] == '\t' || str[i] == '\v' || str[i] =='\r' || str[i] == '\f' || str[i] == '\n' || str[i] == '+')
-		i++;
-	if(str[i] == '-')
+	result = 0;
+	sign = 1;
+	while (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\r' || *str == '\v' || *str == '\f')
+		str++;
+	if (*str == '+')
+		str++;
+	else if (*str == '-')
 	{
 		sign = -1;
-		i++;
+		str++;
 	}
-	while(str[i] <= '9' && str[i] >= '0')
+	while (*str >= '0' && *str <= '9')
 	{
-		result = result * 10 + str[i] - '0';
-		i++;
+		result = result * 10 + *str - '0';
+		str++;
 	}
-	return(result * sign);
-}
-
-int main(int ac, char *av[])
-{
-	printf("%d", ft_atoi(av[1]));
-			printf("\n");
+	return (result * sign);
 }
